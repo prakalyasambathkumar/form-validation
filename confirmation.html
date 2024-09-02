@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmation</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Container styling */
+        .container {
+            position: relative;
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 36px;
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Paragraph styling */
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* List styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 20px;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        ul li strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay loop muted>
+            <source src="background3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <div class="container">
+        <h1>Registration Confirmation</h1>
+        <p>Thank you for registering! Here are your details:</p>
+        <ul>
+            <li><strong>Name:</strong> <span id="confirm-name"></span></li>
+            <li><strong>Email:</strong> <span id="confirm-email"></span></li>
+            <li><strong>Phone Number:</strong> <span id="confirm-phone"></span></li>
+            <li><strong>College:</strong> <span id="confirm-college"></span></li>
+            <li><strong>Event Type:</strong> <span id="confirm-event-type"></span></li>
+            <li><strong>Event Name:</strong> <span id="confirm-event-name"></span></li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the stored profile data from sessionStorage
+            const profileData = JSON.parse(sessionStorage.getItem('profileData'));
+            const eventData = JSON.parse(sessionStorage.getItem('eventData'));
+
+            // Display the retrieved data on the confirmation page
+            if (profileData) {
+                document.getElementById('confirm-name').textContent = profileData.name || 'N/A';
+                document.getElementById('confirm-email').textContent = profileData.email || 'N/A';
+                document.getElementById('confirm-phone').textContent = profileData.phone || 'N/A';
+                document.getElementById('confirm-college').textContent = profileData.college || 'N/A';
+            } else {
+                console.error('Profile data is missing.');
+            }
+
+            if (eventData) {
+                document.getElementById('confirm-event-type').textContent = eventData.eventType || 'N/A';
+                document.getElementById('confirm-event-name').textContent = eventData.eventName || 'N/A';
+            } else {
+                console.error('Event data is missing.');
+            }
+        });
+    </script>
+</body>
+</html>

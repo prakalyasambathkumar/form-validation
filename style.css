@@ -1,0 +1,178 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body and General Page Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background: rgba(0, 0, 0, 0.6); /* For fallback */
+    overflow: hidden;
+}
+
+.video-background video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(60%);
+}
+
+/* Container Styles */
+.container {
+    max-width: 500px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin: 60px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.2s ease-in-out;
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #222;
+    text-transform: uppercase;
+    position: relative;
+    transition: all 0.6s ease;
+}
+
+h1:hover {
+    color: #007bff;
+    transform: scale(1.1);
+    text-shadow: 0px 0px 10px rgba(0, 123, 255, 0.6);
+}
+
+/* Form Styling */
+form p {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+form label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #444;
+    font-size: 1rem;
+    transition: all 0.6s ease;
+}
+
+form label:hover {
+    color: #007bff;
+    transform: translateX(10px);
+}
+
+form input,
+form select {
+    padding: 10px 15px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    color: #333;
+}
+
+form input:focus,
+form select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+form input:hover,
+form select:hover {
+    border-color: #007bff;
+}
+
+form input[type="submit"] {
+    background: #007bff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.6s ease;
+    font-size: 1rem;
+}
+
+form input[type="submit"]:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 86, 179, 0.6);
+}
+
+form input[type="file"] {
+    background: none;
+    padding: 5px;
+    font-size: 0.9rem;
+}
+
+form select {
+    cursor: pointer;
+}
+
+/* Confirmation Page Styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+ul li {
+    font-size: 1.1rem;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    transition: all 0.6s ease;
+}
+
+ul li:hover {
+    color: #007bff;
+    text-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    form input,
+    form select {
+        font-size: 0.9rem;
+    }
+
+    form input[type="submit"] {
+        font-size: 1rem;
+    }
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Style for the video background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .video-background video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Container styling */
+        .container {
+            position: relative;
+            max-width: 600px; /* Increased form size */
+            max-height: 90vh; /* Limit the height to fit the frame */
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow-y: auto; /* Enable vertical scrolling if content overflows */
+        }
+
+        /* Form field styling */
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Style for the submit button */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Preview image styling */
+        #id-preview {
+            max-width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay loop muted>
+            <source src="background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="container">
+        <h1>Create Your Profile</h1>
+        <form id="profileForm" onsubmit="return handleProfileSubmit()">
+            <!-- Name -->
+            <p>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="Name" placeholder="Enter your full name" required>
+            </p>
+
+            <!-- Email -->
+            <p>
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="Email" placeholder="Enter your email" required
+                       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                <!-- Pattern ensures a basic validation for emails -->
+            </p>
+
+            <!-- Phone -->
+            <p>
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="Phone" placeholder="Enter your phone number" required
+                       pattern="\+\d{1,4}[\s-]?\d{1,4}[\s-]?\d{4,10}">
+                <!-- Pattern requires a + followed by 1-4 digits (country code), then the phone number -->
+            </p>
+
+            <!-- Pincode -->
+            <p>
+                <label for="pincode">Pincode:</label>
+                <input type="text" id="pincode" name="Pincode" placeholder="Enter your pincode" required
+                       pattern="\d{6}">
+                <!-- Pattern ensures exactly 6 digits for pincode -->
+            </p>
+
+            <!-- Gender -->
+            <p>
+                <label for="gender">Gender:</label>
+                <select id="gender" name="Gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </p>
+
+            <!-- College Name -->
+            <p>
+                <label for="college">College Name:</label>
+                <input type="text" id="college" name="College" placeholder="Enter your college name" required>
+            </p>
+
+            <!-- College ID Upload -->
+            <p>
+                <label for="college-id">Upload College ID:</label>
+                <input type="file" id="college-id" name="CollegeID" accept="image/*" required>
+            </p>
+            <p>
+                <img id="id-preview" src="" alt="ID Image Preview" style="display: none;">
+            </p>
+
+            <!-- Submit Button -->
+            <p>
+                <input type="submit" value="Register">
+            </p>
+        </form>
+    </div>
+
+    <script>
+        function handleProfileSubmit() {
+            // Fetch form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const gender = document.getElementById('gender').value;
+            const college = document.getElementById('college').value;
+            const collegeID = document.getElementById('college-id').files[0];
+
+            // Store form data in sessionStorage
+            sessionStorage.setItem('profileData', JSON.stringify({
+                name: name,
+                email: email,
+                phone: phone,
+                gender: gender,
+                college: college
+            }));
+
+            // Redirect to event registration page
+            window.location.href = 'event-registration.html';
+            return false; // Prevent form submission
+        }
+
+        // Preview College ID Image
+        document.getElementById('college-id').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const preview = document.getElementById('id-preview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+
+</html>

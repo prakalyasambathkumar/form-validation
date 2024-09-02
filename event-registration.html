@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay loop muted>
+            <source src="background3.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="container">
+        <h1>Event Registration Form</h1>
+        <form id="regForm" onsubmit="return validateForm()">
+            <p>
+                <label for="event-type">Event Type:</label>
+                <select id="event-type" name="EventType" required onchange="populateEventNames()">
+                    <option value="">Select Event Type</option>
+                    <option value="Cultural">Cultural</option>
+                    <option value="Technical">Technical</option>
+                </select>
+            </p>
+            <p>
+                <label for="event-name">Event Name:</label>
+                <select id="event-name" name="EventName" required>
+                    <option value="">Select Event</option>
+                </select>
+            </p>
+            <p>
+                <input type="submit" value="Register">
+            </p>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the profile data from sessionStorage
+            const profileData = JSON.parse(sessionStorage.getItem('profileData'));
+
+            // Pre-fill the form with the retrieved data
+            if (profileData) {
+                document.getElementById('name').value = profileData.name;
+                document.getElementById('email').value = profileData.email;
+            }
+        });
+
+        function populateEventNames() {
+            const eventType = document.getElementById('event-type').value;
+            const eventNameSelect = document.getElementById('event-name');
+
+            // Clear previous options
+            eventNameSelect.innerHTML = '<option value="">Select Event</option>';
+
+            // Define events based on the event type
+            let eventNames = [];
+            if (eventType === 'Cultural') {
+                eventNames = ['Dance Competition', 'Singing Contest', 'Drama Show'];
+            } else if (eventType === 'Technical') {
+                eventNames = ['Coding Hackathon', 'Robotics Challenge', 'Tech Quiz'];
+            }
+
+            // Populate event names dynamically
+            eventNames.forEach(function (event) {
+                const option = document.createElement('option');
+                option.value = event;
+                option.textContent = event;
+                eventNameSelect.appendChild(option);
+            });
+        }
+
+        function validateForm() {
+            // Collect event registration data
+            const eventData = {
+                eventType: document.getElementById('event-type').value,
+                eventName: document.getElementById('event-name').value
+            };
+
+            // Store the event data in sessionStorage
+            sessionStorage.setItem('eventData', JSON.stringify(eventData));
+
+            // Redirect to the confirmation page
+            window.location.href = 'confirmation.html';
+            return false; // Prevent form submission
+        }
+    </script>
+</body>
+</html>
